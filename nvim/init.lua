@@ -3,9 +3,16 @@ local fn = vim.fn
 local opt = vim.o
 local g = vim.g
 
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+-- Set colorscheme
+require('abdelkd.colorscheme')
+cmd[[colorscheme solarized-osaka]]
+
 -- <leader> key. Defaults to `\`. Some people prefer space.
--- g.mapleader = ' '
--- g.maplocalleader = ' '
+g.mapleader = ' '
+g.maplocalleader = ' '
 
 opt.compatible = false
 
@@ -113,3 +120,4 @@ vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')
 -- on the packpath when passing a file to the nvim command
 cmd.syntax('on')
 cmd.syntax('enable')
+

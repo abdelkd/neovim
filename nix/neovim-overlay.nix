@@ -50,6 +50,8 @@ with final.pkgs.lib; let
     # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
     # ^ telescope and extensions
     # UI
+    poimandres-nvim # Poimandres colorscheme
+    catppuccin-nvim # Catppuccin colorscheme
     lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
     nvim-navic # Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic
     statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim/
@@ -63,6 +65,7 @@ with final.pkgs.lib; let
     nvim-surround # https://github.com/kylechui/nvim-surround/
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
+    comment-nvim
     # ^ navigation/editing enhancement plugins
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
@@ -75,15 +78,25 @@ with final.pkgs.lib; let
     # ^ libraries that other plugins depend on
     # bleeding-edge plugins from flake inputs
     # (mkNvimPlugin inputs.wf-nvim "wf.nvim") # (example) keymap hints | https://github.com/Cassin01/wf.nvim
+    (mkNvimPlugin inputs.nvim-tree "nvim-tree")
+    (mkNvimPlugin inputs.nvim-lspconfig "nvim-lsp-config")
+    (mkNvimPlugin inputs.solarized-osaka-nvim "solarized-osaka-nvim")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ];
 
-  extraPackages = with pkgs; [
+  extraPackages = (with pkgs; [
     # language servers, etc.
     lua-language-server
     nil # nix LSP
-  ];
+    gopls # Go LSP
+    # clang # C/C++ LSP
+    # pyright
+    # ruff-lsp
+  ]) ++ (with pkgs.nodePackages; [
+    typescript-language-server
+    "@astrojs/language-server"
+  ]);
 in {
   # This is the neovim derivation
   # returned by the overlay
