@@ -21,10 +21,34 @@ with final.pkgs.lib; let
   #   optional = <true|false>; # Default: false
   #   ...
   # }
-  all-plugins = with pkgs.vimPlugins; [
+  treesitter-grammars = with pkgs.vimPlugins.nvim-treesitter.grammarPlugins; [
+    astro
+    bash
+    c cpp
+    css
+    dart 
+    diff
+    git_rebase
+    go gomod gosum
+    html
+    http
+    json json5 jsonc
+    lua luadoc
+    nix
+    rust
+    sql
+    svelte
+    tsx
+    vim
+    vue
+    xml
+    yaml
+    zig
+  ];
+  all-plugins = (with pkgs.vimPlugins; [
     # plugins from nixpkgs go in here.
     # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
-    nvim-treesitter.withAllGrammars
+    # nvim-treesitter.withAllGrammars
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
@@ -83,7 +107,7 @@ with final.pkgs.lib; let
     (mkNvimPlugin inputs.solarized-osaka-nvim "solarized-osaka-nvim")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
-  ];
+  ]) ++ treesitter-grammars;
 
   extraPackages = (with pkgs; [
     ripgrep
