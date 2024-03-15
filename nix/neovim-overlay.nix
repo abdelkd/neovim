@@ -90,9 +90,9 @@ with final.pkgs.lib; let
     lua-language-server
     nil # nix LSP
     gopls # Go LSP
-    # clang # C/C++ LSP
-    # pyright
-    # ruff-lsp
+    clang # C/C++ LSP
+    pyright
+    ruff-lsp
   ]) ++ (with pkgs.nodePackages; [
     typescript-language-server
     "@astrojs/language-server"

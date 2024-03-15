@@ -7,15 +7,12 @@ local api = vim.api
 local fn = vim.fn
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
+local wk = require('which-key')
 
 -- Yank from current position till end of current line
 keymap.set('n', 'Y', 'y$', { silent = true, desc = '[Y]ank to end of line' })
 
 -- Buffer list navigation
-keymap.set('n', '[b', vim.cmd.bprevious, { silent = true, desc = 'previous [b]uffer' })
-keymap.set('n', ']b', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
-keymap.set('n', '[B', vim.cmd.bfirst, { silent = true, desc = 'first [B]uffer' })
-keymap.set('n', ']B', vim.cmd.blast, { silent = true, desc = 'last [B]uffer' })
 
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
@@ -64,11 +61,27 @@ local function cright()
     notify = 'Quickfix list is empty!',
   }
 end
+wk.register({
+    b = {
+      n = { vim.cmd.bnext, "Next Buffer" },
+      p = { vim.cmd.bprevious, "Previous Buffer" },
+    },
+    c = {
+      f = { vim.cmd.cfirst, "First quickfix entry" },
+      l = { vim.cmd.clast, "Last quickfix entry" },
+      n = { cleft, "Cycle quickfix left" },
+      p = { cright, "Cycle quickfix right" },
+    },
+    t = {
+      n = { vim.cmd.tabnew, "New Tab" },
+      c = { vim.cmd.tabclose, "New Close" },
+    },
+}, { prefix = "<leader>" })
 
-keymap.set('n', '[c', cleft, { silent = true, desc = '[c]ycle quickfix left' })
-keymap.set('n', ']c', cright, { silent = true, desc = '[c]ycle quickfix right' })
-keymap.set('n', '[C', vim.cmd.cfirst, { silent = true, desc = 'first quickfix entry' })
-keymap.set('n', ']C', vim.cmd.clast, { silent = true, desc = 'last quickfix entry' })
+-- keymap.set('n', '[c', cleft, { silent = true, desc = '[c]ycle quickfix left' })
+-- keymap.set('n', ']c', cright, { silent = true, desc = '[c]ycle quickfix right' })
+-- keymap.set('n', '[C', vim.cmd.cfirst, { silent = true, desc = 'first quickfix entry' })
+-- keymap.set('n', ']C', vim.cmd.clast, { silent = true, desc = 'last quickfix entry' })
 
 local function lleft()
   try_fallback_notify {

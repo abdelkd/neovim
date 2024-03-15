@@ -1,3 +1,7 @@
+if vim.g.did_load_lualine_plugin then
+  return
+end
+vim.g.did_load_lualine_plugin = true
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
@@ -217,11 +221,6 @@ ins_right {
   color = { fg = colors.blue },
   padding = { left = 1 },
 }
-
-if vim.g.did_load_lualine_plugin then
-  return
-end
-vim.g.did_load_lualine_plugin = true
 
 local navic = require('nvim-navic')
 navic.setup {}

@@ -1,7 +1,14 @@
+if vim.g.did_load_lspconfig_plugin then
+  return
+end
+vim.g.did_load_lspconfig_plugin = true
+
+
 local lspconfig = require('lspconfig')
 
 lspconfig.tsserver.setup {}
 lspconfig.gopls.setup {}
+lspconfig.clangd.setup {}
 --lspconfig.jsonls.setup {}
 --lspconfig.markdown_oxide.setup {}
 lspconfig.pyright.setup {}
