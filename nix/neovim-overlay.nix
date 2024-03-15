@@ -48,7 +48,7 @@ with final.pkgs.lib; let
   all-plugins = (with pkgs.vimPlugins; [
     # plugins from nixpkgs go in here.
     # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
-    # nvim-treesitter.withAllGrammars
+    nvim-treesitter
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
@@ -115,7 +115,7 @@ with final.pkgs.lib; let
     lua-language-server
     nil # nix LSP
     gopls # Go LSP
-    clang # C/C++ LSP
+    clang-tools # C/C++ LSP
     pyright
     ruff-lsp
   ]) ++ (with pkgs.nodePackages; [

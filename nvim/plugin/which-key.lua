@@ -5,6 +5,6 @@ end
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- local wk = require('which-key')
+local wk = require('which-key')
 
-wk.setup()
+wk.setup({})
