@@ -6,6 +6,12 @@
     flake-utils.url = "github:numtide/flake-utils";
     gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
 
+    zls = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
     };

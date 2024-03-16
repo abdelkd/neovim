@@ -118,6 +118,7 @@ with final.pkgs.lib; let
     clang-tools # C/C++ LSP
     pyright
     ruff-lsp
+    inputs.zls.packages.${pkgs.system}.master # Zig Language Server
   ]) ++ (with pkgs.nodePackages; [
     typescript-language-server
     "@astrojs/language-server"

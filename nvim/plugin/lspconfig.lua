@@ -6,13 +6,22 @@ vim.g.did_load_lspconfig_plugin = true
 
 local lspconfig = require('lspconfig')
 
-lspconfig.tsserver.setup {}
-lspconfig.gopls.setup {}
-lspconfig.clangd.setup {}
---lspconfig.jsonls.setup {}
---lspconfig.markdown_oxide.setup {}
-lspconfig.pyright.setup {}
-lspconfig.ruff_lsp.setup {}
+local lsp_list = {
+  "clangd",
+  "tsserver",
+  "gopls",
+  "jsonls",
+  "pyright",
+  "ruff_lsp",
+  "zls",
+}
+
+for _, lsp_name in ipairs(lsp_list) do
+  local lsp_function = lspconfig[lsp_name].setup {}
+  if lsp_function then
+    lsp_function()
+  end
+end
 
 lspconfig.lua_ls.setup {
   on_init = function(client)
