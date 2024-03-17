@@ -50,9 +50,11 @@ with final.pkgs.lib; let
     # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
     nvim-treesitter
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
+    none-ls-nvim
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
     cmp_luasnip # snippets autocompletion extension for nvim-cmp | https://github.com/saadparwaiz1/cmp_luasnip/
+    friendly-snippets # vscode snippets
     lspkind-nvim # vscode-like LSP pictograms | https://github.com/onsails/lspkind.nvim/
     cmp-nvim-lsp # LSP as completion source | https://github.com/hrsh7th/cmp-nvim-lsp/
     cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
@@ -90,6 +92,7 @@ with final.pkgs.lib; let
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
     comment-nvim
+    # vim-visual-multi
     # ^ navigation/editing enhancement plugins
     # Useful utilities
     nvim-unception # Prevent nested neovim sessions | nvim-unception
@@ -112,16 +115,26 @@ with final.pkgs.lib; let
   extraPackages = (with pkgs; [
     ripgrep
     # language servers, etc.
-    lua-language-server
+    lua-language-server stylua
     nil # nix LSP
     gopls # Go LSP
     clang-tools # C/C++ LSP
     pyright
     ruff-lsp
     inputs.zls.packages.${pkgs.system}.master # Zig Language Server
+
+    # formatting & linting
+    prettierd
+    rustywind
+    statix
+    nixfmt
+    shfmt 
+    cppcheck
+    markdownlint-cli
   ]) ++ (with pkgs.nodePackages; [
     typescript-language-server
     "@astrojs/language-server"
+    eslint_d
   ]);
 in {
   # This is the neovim derivation

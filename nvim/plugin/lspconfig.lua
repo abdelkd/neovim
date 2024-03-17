@@ -3,7 +3,6 @@ if vim.g.did_load_lspconfig_plugin then
 end
 vim.g.did_load_lspconfig_plugin = true
 
-
 local lspconfig = require('lspconfig')
 
 local lsp_list = {
@@ -14,10 +13,17 @@ local lsp_list = {
   "pyright",
   "ruff_lsp",
   "zls",
+  "html",
+  "lua_ls",
 }
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 for _, lsp_name in ipairs(lsp_list) do
-  local lsp_function = lspconfig[lsp_name].setup {}
+  local lsp_function = lspconfig[lsp_name].setup({
+    capabilities = capabilities,
+  })
+
   if lsp_function then
     lsp_function()
   end

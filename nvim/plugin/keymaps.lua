@@ -1,7 +1,7 @@
 if vim.g.did_load_keymaps_plugin then
   return
 end
-vim.g.did_load_keymaps_plugin = true
+vim.g.did_load_keymaps_plugin = false
 
 local api = vim.api
 local fn = vim.fn
@@ -61,6 +61,11 @@ local function cright()
     notify = 'Quickfix list is empty!',
   }
 end
+
+
+-- Open or close nvim-tree
+keymap.set('n', '<C-n>', '<CMD>NvimTreeToggle<Return>')
+
 wk.register({
     b = {
       n = { vim.cmd.bnext, "Next Buffer" },
@@ -72,16 +77,21 @@ wk.register({
       n = { cleft, "Cycle quickfix left" },
       p = { cright, "Cycle quickfix right" },
     },
+    s = {
+      s = { vim.cmd.split, "Split window horizontally" },
+      v = { vim.cmd.vsplit, "Split window vertically" },
+    },
     t = {
       n = { vim.cmd.tabnew, "New Tab" },
       c = { vim.cmd.tabclose, "New Close" },
     },
 }, { prefix = "<leader>" })
 
--- keymap.set('n', '[c', cleft, { silent = true, desc = '[c]ycle quickfix left' })
--- keymap.set('n', ']c', cright, { silent = true, desc = '[c]ycle quickfix right' })
--- keymap.set('n', '[C', vim.cmd.cfirst, { silent = true, desc = 'first quickfix entry' })
--- keymap.set('n', ']C', vim.cmd.clast, { silent = true, desc = 'last quickfix entry' })
+-- Jump between windows
+keymap.set('n', '<C-l>', function () vim.cmd.winc('l') end, { silent = true, desc = 'jump right' })
+keymap.set('n', '<C-h>', function () vim.cmd.winc('h') end, { silent = true, desc = 'jump left' })
+keymap.set('n', '<C-k>', function () vim.cmd.winc('k') end, { silent = true, desc = 'jump up' })
+keymap.set('n', '<C-j>', function () vim.cmd.winc('j') end, { silent = true, desc = 'jump down' })
 
 local function lleft()
   try_fallback_notify {
@@ -198,9 +208,6 @@ keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move [d]own half-page and center' 
 keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move [u]p half-page and center' })
 keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'move DOWN [f]ull-page and center' })
 keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'move UP full-page and center' })
-
--- Open or close nvim-tree
-keymap.set('n', '<C-n>', '<CMD>:NvimTreeToggle<Return>')
 
 --- Disabled keymaps [enable at your own risk]
 
