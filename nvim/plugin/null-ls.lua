@@ -13,10 +13,11 @@ null_ls.setup {
     null_ls.builtins.formatting.nixfmt,
     null_ls.builtins.formatting.rustywind,
     null_ls.builtins.formatting.shfmt,
-    null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.diagnostics.cppcheck,
     null_ls.builtins.diagnostics.markdownlint,
     null_ls.builtins.diagnostics.todo_comments,
-    null_ls.builtins.diagnostics.dictionary,
+    -- TODO: Fix this
+    -- null_ls.builtins.diagnostics.eslint_d,
+    -- null_ls.builtins.diagnostics.dictionary,
   },
 }
