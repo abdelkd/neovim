@@ -185,6 +185,54 @@
         "type": "github"
       }
     },
+    "nvim-dap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710499310,
+        "narHash": "sha256-6x2QPHcZqW27g/sV50kTh5+ilMvHprWZeE6anSvnV6s=",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "rev": "c43c2473ecb482a9d91f32c1d4c0098fffad3c7d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-dap",
+        "type": "github"
+      }
+    },
+    "nvim-dap-go": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708549842,
+        "narHash": "sha256-drcFUVH+aRRappEbkSvkTiONMZ5p76IMdrO6af7GzOQ=",
+        "owner": "leoluz",
+        "repo": "nvim-dap-go",
+        "rev": "64f73400761e2d19459e664a52ea478f3a4420e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leoluz",
+        "repo": "nvim-dap-go",
+        "type": "github"
+      }
+    },
+    "nvim-dap-ui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708172616,
+        "narHash": "sha256-OMQS1m33scR0O+KiAHyjfrjsKEj1wFq0XWbjBIULDCo=",
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "rev": "9720eb5fa2f41988e8770f973cd11b76dd568a5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rcarriga",
+        "repo": "nvim-dap-ui",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -226,6 +274,9 @@
         "gen-luarc": "gen-luarc",
         "gitsigns-nvim": "gitsigns-nvim",
         "nixpkgs": "nixpkgs_2",
+        "nvim-dap": "nvim-dap",
+        "nvim-dap-go": "nvim-dap-go",
+        "nvim-dap-ui": "nvim-dap-ui",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-tree": "nvim-tree",
         "solarized-osaka-nvim": "solarized-osaka-nvim",

@@ -27,6 +27,18 @@
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
+    nvim-dap = {
+      url = "github:mfussenegger/nvim-dap";
+      flake = false;
+    };
+    nvim-dap-ui = {
+      url = "github:rcarriga/nvim-dap-ui";
+      flake = false;
+    };
+    nvim-dap-go = {
+      url = "github:leoluz/nvim-dap-go";
+      flake = false;
+    };
 
     # Add bleeding-edge plugins here.
     # They can be updated with `nix flake update` (make sure to commit the generated flake.lock)

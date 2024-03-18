@@ -108,6 +108,9 @@ with final.pkgs.lib; let
     (mkNvimPlugin inputs.nvim-tree "nvim-tree")
     (mkNvimPlugin inputs.nvim-lspconfig "nvim-lsp-config")
     (mkNvimPlugin inputs.solarized-osaka-nvim "solarized-osaka-nvim")
+    (mkNvimPlugin inputs.nvim-dap "nvim-dap")
+    (mkNvimPlugin inputs.nvim-dap-ui "nvim-dap-ui")
+    (mkNvimPlugin inputs.nvim-dap-go "nvim-dap-go")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ]) ++ treesitter-grammars;
@@ -131,6 +134,9 @@ with final.pkgs.lib; let
     shfmt 
     cppcheck
     markdownlint-cli
+
+    # debuggers
+    delve
   ]) ++ (with pkgs.nodePackages; [
     typescript-language-server
     "@astrojs/language-server"

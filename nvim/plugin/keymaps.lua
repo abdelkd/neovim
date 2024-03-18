@@ -62,36 +62,43 @@ local function cright()
   }
 end
 
-
 -- Open or close nvim-tree
 keymap.set('n', '<C-n>', '<CMD>NvimTreeToggle<Return>')
 
 wk.register({
-    b = {
-      n = { vim.cmd.bnext, "Next Buffer" },
-      p = { vim.cmd.bprevious, "Previous Buffer" },
-    },
-    c = {
-      f = { vim.cmd.cfirst, "First quickfix entry" },
-      l = { vim.cmd.clast, "Last quickfix entry" },
-      n = { cleft, "Cycle quickfix left" },
-      p = { cright, "Cycle quickfix right" },
-    },
-    s = {
-      s = { vim.cmd.split, "Split window horizontally" },
-      v = { vim.cmd.vsplit, "Split window vertically" },
-    },
-    t = {
-      n = { vim.cmd.tabnew, "New Tab" },
-      c = { vim.cmd.tabclose, "New Close" },
-    },
-}, { prefix = "<leader>" })
+  b = {
+    n = { vim.cmd.bnext, 'Next Buffer' },
+    p = { vim.cmd.bprevious, 'Previous Buffer' },
+  },
+  c = {
+    f = { vim.cmd.cfirst, 'First quickfix entry' },
+    l = { vim.cmd.clast, 'Last quickfix entry' },
+    n = { cleft, 'Cycle quickfix left' },
+    p = { cright, 'Cycle quickfix right' },
+  },
+  s = {
+    s = { vim.cmd.split, 'Split window horizontally' },
+    v = { vim.cmd.vsplit, 'Split window vertically' },
+  },
+  t = {
+    n = { vim.cmd.tabnew, 'New Tab' },
+    c = { vim.cmd.tabclose, 'New Close' },
+  },
+}, { prefix = '<leader>' })
 
 -- Jump between windows
-keymap.set('n', '<C-l>', function () vim.cmd.winc('l') end, { silent = true, desc = 'jump right' })
-keymap.set('n', '<C-h>', function () vim.cmd.winc('h') end, { silent = true, desc = 'jump left' })
-keymap.set('n', '<C-k>', function () vim.cmd.winc('k') end, { silent = true, desc = 'jump up' })
-keymap.set('n', '<C-j>', function () vim.cmd.winc('j') end, { silent = true, desc = 'jump down' })
+keymap.set('n', '<C-l>', function()
+  vim.cmd.winc('l')
+end, { silent = true, desc = 'jump right' })
+keymap.set('n', '<C-h>', function()
+  vim.cmd.winc('h')
+end, { silent = true, desc = 'jump left' })
+keymap.set('n', '<C-k>', function()
+  vim.cmd.winc('k')
+end, { silent = true, desc = 'jump up' })
+keymap.set('n', '<C-j>', function()
+  vim.cmd.winc('j')
+end, { silent = true, desc = 'jump down' })
 
 local function lleft()
   try_fallback_notify {
