@@ -24,6 +24,16 @@ api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+-- Highlight when yanking (copying) textDocument
+local highlight_yank_group = api.nvim_create_augroup('highlight-yank', { clear = true })
+api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = highlight_yank_group,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
 -- LSP
 local keymap = vim.keymap
 

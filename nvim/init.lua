@@ -1,6 +1,6 @@
 local cmd = vim.cmd
 local fn = vim.fn
-local opt = vim.o
+local opt = vim.opt
 local g = vim.g
 
 g.loaded_netrw = 1
@@ -14,7 +14,19 @@ cmd[[colorscheme catppuccin-mocha]]
 g.mapleader = ' '
 g.maplocalleader = ' '
 
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+opt.clipboard = 'unnamedplus'
+
 opt.compatible = false
+
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = 'a'
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
 
 -- Enable true colour support
 if fn.has('termguicolors') then
@@ -26,13 +38,29 @@ end
 -- Search down into subfolders
 opt.path = vim.o.path .. '**'
 
+-- Configure how new splits should be opened
+opt.splitright = true
+opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Minimal number of screen lines to keep above and below the cursor.
+opt.scrolloff = 10
+
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.lazyredraw = true
 opt.showmatch = true -- Highlight matching parentheses, etc
 opt.incsearch = true
-opt.hlsearch = true
+
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 opt.spell = true
 opt.spelllang = 'en'

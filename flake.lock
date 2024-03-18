@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "conform-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710784102,
+        "narHash": "sha256-EhtPhQXw3MylKFSC8+FaEtaJcgwA/7HQdB7u4BKo6Zk=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "41586cbc81b8d344a795264989a3db79d0a27615",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -117,6 +133,22 @@
       "original": {
         "owner": "lewis6991",
         "repo": "gitsigns.nvim",
+        "type": "github"
+      }
+    },
+    "mini-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710420512,
+        "narHash": "sha256-sJVfm9kaGFwty4pO4i+UEuSspdLvxmepYq63OBzx5Wk=",
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
+        "rev": "9968f6e221ae7bdac57a910c5bf2026186aa023c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
         "type": "github"
       }
     },
@@ -270,9 +302,11 @@
     },
     "root": {
       "inputs": {
+        "conform-nvim": "conform-nvim",
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
         "gitsigns-nvim": "gitsigns-nvim",
+        "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs_2",
         "nvim-dap": "nvim-dap",
         "nvim-dap-go": "nvim-dap-go",

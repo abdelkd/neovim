@@ -73,6 +73,7 @@ with final.pkgs.lib; let
     # telescope and extensions
     telescope-nvim # https://github.com/nvim-telescope/telescope.nvim/
     telescope-fzy-native-nvim # https://github.com/nvim-telescope/telescope-fzy-native.nvim
+    telescope-ui-select-nvim
     # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
     # ^ telescope and extensions
     # UI
@@ -111,6 +112,8 @@ with final.pkgs.lib; let
     (mkNvimPlugin inputs.nvim-dap "nvim-dap")
     (mkNvimPlugin inputs.nvim-dap-ui "nvim-dap-ui")
     (mkNvimPlugin inputs.nvim-dap-go "nvim-dap-go")
+    (mkNvimPlugin inputs.conform-nvim "conform-nvim")
+    (mkNvimPlugin inputs.mini-nvim "mini-nvim")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ]) ++ treesitter-grammars;

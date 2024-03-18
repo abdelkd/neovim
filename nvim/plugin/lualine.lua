@@ -305,4 +305,4 @@ end
 --   extensions = { 'fugitive', 'fzf', 'toggleterm', 'quickfix' },
 -- }
 
-require('lualine').setup(config)
+-- require('lualine').setup(config)
