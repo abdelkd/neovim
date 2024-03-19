@@ -13,10 +13,13 @@ require('mini.ai').setup { n_lines = 500 }
 -- - sr)'  - [S]urround [R]eplace [)] [']
 require('mini.surround').setup()
 
+-- Autohighlight word under cursor
+require('mini.cursorword').setup()
+
 -- Simple and easy statusline.
 --  You could remove this setup call if you don't like it,
 --  and try some other statusline plugin
-local statusline = require 'mini.statusline'
+local statusline = require('mini.statusline')
 -- set use_icons to true if you have a Nerd Font
 statusline.setup { use_icons = true }
 
@@ -25,7 +28,7 @@ statusline.setup { use_icons = true }
 -- cursor location to LINE:COLUMN
 ---@diagnostic disable-next-line: duplicate-set-field
 statusline.section_location = function()
-return '%2l:%-2v'
+  return '%2l:%-2v'
 end
 
 -- ... and there is more!

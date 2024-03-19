@@ -114,6 +114,7 @@ with final.pkgs.lib; let
     (mkNvimPlugin inputs.nvim-dap-go "nvim-dap-go")
     (mkNvimPlugin inputs.conform-nvim "conform-nvim")
     (mkNvimPlugin inputs.mini-nvim "mini-nvim")
+    (mkNvimPlugin inputs.nvim-lint "nvim-lint")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ]) ++ treesitter-grammars;
@@ -127,6 +128,7 @@ with final.pkgs.lib; let
     clang-tools # C/C++ LSP
     pyright
     ruff-lsp
+    tailwindcss-language-server
     inputs.zls.packages.${pkgs.system}.master # Zig Language Server
 
     # formatting & linting

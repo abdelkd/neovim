@@ -265,6 +265,22 @@
         "type": "github"
       }
     },
+    "nvim-lint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710508651,
+        "narHash": "sha256-MOZd+5cqft31M10tKu5J0coxGGzvRsrRnfUfPvWpyeU=",
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "rev": "03b1fc593638098a35de26d768d5f43b0fe57041",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -311,6 +327,7 @@
         "nvim-dap": "nvim-dap",
         "nvim-dap-go": "nvim-dap-go",
         "nvim-dap-ui": "nvim-dap-ui",
+        "nvim-lint": "nvim-lint",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-tree": "nvim-tree",
         "solarized-osaka-nvim": "solarized-osaka-nvim",

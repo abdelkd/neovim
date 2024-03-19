@@ -8,9 +8,18 @@ local lspkind = require('lspkind')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-cmp.setup({
+cmp.setup {
+  enabled = function()
+    -- disable completion in comment
+    local context = require('cmp.config.context')
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture('comment') and not context.in_syntax_group('comment')
+    end
+  end,
   formatting = {
-    format = lspkind.cmp_format({
+    format = lspkind.cmp_format {
       mode = 'symbol_text',
       with_text = true,
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
@@ -25,24 +34,24 @@ cmp.setup({
         path = '[PATH]',
         luasnip = '[SNIP]',
       },
-    }),
+    },
   },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
-    end
+    end,
   },
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-  }),
+  mapping = cmp.mapping.preset.insert {
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm { select = true },
+  },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
@@ -54,7 +63,7 @@ cmp.setup({
     { name = 'cmdline' },
     { name = 'cmdline_history' },
   }),
-})
+}
 
 -- local function has_words_before()
 --   local unpack_ = unpack or table.unpack

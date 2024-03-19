@@ -6,23 +6,24 @@ vim.g.did_load_lspconfig_plugin = true
 local lspconfig = require('lspconfig')
 
 local lsp_list = {
-  "clangd",
-  "tsserver",
-  "gopls",
-  "jsonls",
-  "pyright",
-  "ruff_lsp",
-  "zls",
-  "html",
-  "lua_ls",
+  'clangd',
+  'tsserver',
+  'tailwindcss',
+  'gopls',
+  'jsonls',
+  'pyright',
+  'ruff_lsp',
+  'zls',
+  'html',
+  'lua_ls',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp_name in ipairs(lsp_list) do
-  local lsp_function = lspconfig[lsp_name].setup({
+  local lsp_function = lspconfig[lsp_name].setup {
     capabilities = capabilities,
-  })
+  }
 
   if lsp_function then
     lsp_function()
@@ -38,21 +39,20 @@ lspconfig.lua_ls.setup {
 
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
-        version = 'LuaJIT'
+        version = 'LuaJIT',
       },
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
-        }
-      }
+          vim.env.VIMRUNTIME,
+        },
+      },
     })
   end,
   settings = {
-    Lua = {}
-  }
+    Lua = {},
+  },
 }
-
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -80,5 +80,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
-  end
+  end,
 })
