@@ -60,10 +60,23 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'path' },
     { name = 'nvim_lua' },
-    { name = 'cmdline' },
-    { name = 'cmdline_history' },
   }),
 }
+
+cmp.setup.cmdline({ "/", "?" }, {
+  completion = {
+    autocomplete = true,
+  },
+  mapping = cmp.mapping.preset.cmdline({
+    ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+    ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true, }),
+  }),
+  sources = {
+    { name = 'cmdline' },
+    { name = 'cmdline_history' },
+  }
+})
 
 -- local function has_words_before()
 --   local unpack_ = unpack or table.unpack
