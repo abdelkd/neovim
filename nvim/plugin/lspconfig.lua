@@ -21,9 +21,19 @@ local lsp_list = {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp_name in ipairs(lsp_list) do
-  local lsp_function = lspconfig[lsp_name].setup {
+  local opts = {
     capabilities = capabilities,
   }
+
+  if lsp_name == 'tsserver' then
+    opts.settings = {
+      implicitProjectConfiguration = {
+        checkJs = true,
+      }
+    }
+  end
+
+  local lsp_function = lspconfig[lsp_name].setup(opts)
 
   if lsp_function then
     lsp_function()
