@@ -16,6 +16,8 @@ local lsp_list = {
   'zls',
   'html',
   'lua_ls',
+  'phpactor',
+  'emmet_language_server',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -25,11 +27,11 @@ for _, lsp_name in ipairs(lsp_list) do
     capabilities = capabilities,
   }
 
-  if lsp_name == 'tsserver' then
+  if lsp_name == 'er' then
     opts.settings = {
       implicitProjectConfiguration = {
         checkJs = true,
-      }
+      },
     }
   end
 

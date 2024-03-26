@@ -151,6 +151,8 @@ let
     shfmt
     cppcheck
     markdownlint-cli
+    emmet-language-server
+    phpactor
 
     # debuggers
     delve
