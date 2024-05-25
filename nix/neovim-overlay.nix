@@ -126,6 +126,7 @@ let
     (mkNvimPlugin inputs.conform-nvim "conform-nvim")
     (mkNvimPlugin inputs.mini-nvim "mini-nvim")
     (mkNvimPlugin inputs.nvim-lint "nvim-lint")
+    (mkNvimPlugin inputs.zig-vim "zig-vim")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ]) ++ treesitter-grammars;
@@ -138,10 +139,12 @@ let
     nil # nix LSP
     gopls # Go LSP
     clang-tools # C/C++ LSP
+    htmx-lsp # HTMX lsp
     pyright
     ruff-lsp
     tailwindcss-language-server
-    inputs.zls.packages.${pkgs.system}.master # Zig Language Server
+    inputs.zig-overlay.packages.${system}."master-2024-03-08"
+    inputs.zls.packages.${pkgs.system}.default
 
     # formatting & linting
     prettierd
@@ -158,6 +161,7 @@ let
     delve
   ]) ++ (with pkgs.nodePackages; [
     typescript-language-server
+    svelte-language-server
     "@astrojs/language-server"
     eslint_d
   ]);

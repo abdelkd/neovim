@@ -6,6 +6,7 @@ vim.g.did_load_lspconfig_plugin = true
 local lspconfig = require('lspconfig')
 
 local lsp_list = {
+  'astro',
   'clangd',
   'tsserver',
   'tailwindcss',
@@ -13,11 +14,11 @@ local lsp_list = {
   'jsonls',
   'pyright',
   'ruff_lsp',
-  'zls',
   'html',
-  'lua_ls',
+  'htmx',
   'phpactor',
   'emmet_language_server',
+  'zls',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -33,6 +34,10 @@ for _, lsp_name in ipairs(lsp_list) do
         checkJs = true,
       },
     }
+  end
+
+  if lsp_name == 'zls' then
+    opts.cmd = { '/home/kareem/.zls' }
   end
 
   local lsp_function = lspconfig[lsp_name].setup(opts)

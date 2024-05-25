@@ -8,11 +8,22 @@ g.loaded_netrwPlugin = 1
 
 -- Set colorscheme
 require('abdelkd.colorscheme')
-cmd[[colorscheme catppuccin-mocha]]
+cmd([[colorscheme catppuccin-mocha]])
 
 -- <leader> key. Defaults to `\`. Some people prefer space.
 g.mapleader = ' '
 g.maplocalleader = ' '
+
+require('nvim-web-devicons').setup {
+  strict = true,
+  override_by_extension = {
+    astro = {
+      icon = '',
+      color = '#EF8547',
+      name = 'astro',
+    },
+  },
+}
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -148,4 +159,3 @@ vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')
 -- on the packpath when passing a file to the nvim command
 cmd.syntax('on')
 cmd.syntax('enable')
-
