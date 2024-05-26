@@ -8,7 +8,7 @@ local lspconfig = require('lspconfig')
 local lsp_list = {
   'astro',
   'clangd',
-  'jdtls',
+  -- 'jdtls',
   'tsserver',
   'tailwindcss',
   'gopls',

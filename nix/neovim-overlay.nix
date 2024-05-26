@@ -136,7 +136,8 @@ let
   extraPackages = (with pkgs; [
     ripgrep
     # language servers, etc.
-    lua-language-server stylua # Lua
+    lua-language-server
+    stylua # Lua
     nil # nix LSP
     gopls # Go LSP
     clang-tools # C/C++ LSP
@@ -144,7 +145,7 @@ let
     pyright # Python
     ruff-lsp
     tailwindcss-language-server # Tailwind
-    jdt-language-server # Java
+    # jdt-language-server # Java
     inputs.zig-overlay.packages.${system}."master-2024-03-08"
     inputs.zls.packages.${pkgs.system}.default
 
