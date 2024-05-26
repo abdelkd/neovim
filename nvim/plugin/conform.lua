@@ -10,7 +10,7 @@ require('conform').setup {
       end
     end
 
-    return { timeout_ms = 200, lsp_fallback = true }, on_format
+    return { timeout_ms = 100, lsp_fallback = true }, on_format
   end,
   -- format_after_save = function(bufnr)
   --   if slow_format_filetypes[vim.bo[bufnr].filetype] then

@@ -50,6 +50,10 @@
       url = "github:ziglang/zig.vim";
       flake = false;
     };
+    vim-svelte-plugin = {
+      url = "github:leafOfTree/vim-svelte-plugin";
+      flake = false;
+    };
 
     # Add bleeding-edge plugins here.
     # They can be updated with `nix flake update` (make sure to commit the generated flake.lock)

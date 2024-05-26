@@ -445,6 +445,7 @@
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-tree": "nvim-tree",
         "solarized-osaka-nvim": "solarized-osaka-nvim",
+        "vim-svelte-plugin": "vim-svelte-plugin",
         "zig-overlay": "zig-overlay",
         "zig-vim": "zig-vim",
         "zls": "zls"
@@ -508,6 +509,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "vim-svelte-plugin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710323705,
+        "narHash": "sha256-zmGtguxuOlV/VgEqn8X4Uf/PKQsiW0tqNwiytM7muz8=",
+        "owner": "leafOfTree",
+        "repo": "vim-svelte-plugin",
+        "rev": "e0971a037ace074f61703fd8d0cd7feb313690ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leafOfTree",
+        "repo": "vim-svelte-plugin",
         "type": "github"
       }
     },

@@ -8,12 +8,14 @@ local lspconfig = require('lspconfig')
 local lsp_list = {
   'astro',
   'clangd',
+  'jdtls',
   'tsserver',
   'tailwindcss',
   'gopls',
   'jsonls',
   'pyright',
   'ruff_lsp',
+  'svelte',
   'html',
   'htmx',
   'phpactor',
@@ -27,14 +29,6 @@ for _, lsp_name in ipairs(lsp_list) do
   local opts = {
     capabilities = capabilities,
   }
-
-  if lsp_name == 'er' then
-    opts.settings = {
-      implicitProjectConfiguration = {
-        checkJs = true,
-      },
-    }
-  end
 
   if lsp_name == 'zls' then
     opts.cmd = { '/home/kareem/.zls' }

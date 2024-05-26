@@ -7,8 +7,7 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 -- Set colorscheme
-require('abdelkd.colorscheme')
-cmd([[colorscheme catppuccin-mocha]])
+cmd([[colorscheme solarized-osaka]])
 
 -- <leader> key. Defaults to `\`. Some people prefer space.
 g.mapleader = ' '

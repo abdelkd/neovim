@@ -37,6 +37,7 @@ let
     gosum
     html
     http
+    java
     jsdoc
     json
     json5
@@ -127,6 +128,7 @@ let
     (mkNvimPlugin inputs.mini-nvim "mini-nvim")
     (mkNvimPlugin inputs.nvim-lint "nvim-lint")
     (mkNvimPlugin inputs.zig-vim "zig-vim")
+    (mkNvimPlugin inputs.vim-svelte-plugin "vim-svelte-plugin")
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
   ]) ++ treesitter-grammars;
@@ -134,15 +136,15 @@ let
   extraPackages = (with pkgs; [
     ripgrep
     # language servers, etc.
-    lua-language-server
-    stylua
+    lua-language-server stylua # Lua
     nil # nix LSP
     gopls # Go LSP
     clang-tools # C/C++ LSP
     htmx-lsp # HTMX lsp
-    pyright
+    pyright # Python
     ruff-lsp
-    tailwindcss-language-server
+    tailwindcss-language-server # Tailwind
+    jdt-language-server # Java
     inputs.zig-overlay.packages.${system}."master-2024-03-08"
     inputs.zls.packages.${pkgs.system}.default
 
@@ -155,7 +157,6 @@ let
     cppcheck
     markdownlint-cli
     emmet-language-server
-    phpactor
 
     # debuggers
     delve
