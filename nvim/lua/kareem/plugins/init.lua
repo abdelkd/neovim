@@ -1,7 +1,7 @@
 require('kareem.plugins.alpha')
 require('kareem.plugins.auto-session')
 require('kareem.plugins.autocommands')
-require('kareem.plugins.autopairs')
+-- require('kareem.plugins.autopairs')
 require('kareem.plugins.bufferline')
 require('kareem.plugins.comment')
 require('kareem.plugins.completion')
