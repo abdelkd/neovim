@@ -1,6 +1,8 @@
 # This overlay, when applied to nixpkgs, adds the final neovim derivation to nixpkgs.
-{inputs}: final: prev:
-with final.pkgs.lib; let
+{ inputs }:
+final: prev:
+with final.pkgs.lib;
+let
   pkgs = final;
 
   # Use this to create a plugin from a flake input
@@ -26,67 +28,76 @@ with final.pkgs.lib; let
   #   ...
   # }
   all-plugins = with pkgs.vimPlugins; [
-    # plugins from nixpkgs go in here.
-    # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
     nvim-treesitter.withAllGrammars
-    luasnip # snippets | https://github.com/l3mon4d3/luasnip/
-    # nvim-cmp (autocompletion) and extensions
-    nvim-cmp # https://github.com/hrsh7th/nvim-cmp
-    cmp_luasnip # snippets autocompletion extension for nvim-cmp | https://github.com/saadparwaiz1/cmp_luasnip/
-    lspkind-nvim # vscode-like LSP pictograms | https://github.com/onsails/lspkind.nvim/
-    cmp-nvim-lsp # LSP as completion source | https://github.com/hrsh7th/cmp-nvim-lsp/
-    cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
-    cmp-buffer # current buffer as completion source | https://github.com/hrsh7th/cmp-buffer/
-    cmp-path # file paths as completion source | https://github.com/hrsh7th/cmp-path/
-    cmp-nvim-lua # neovim lua API as completion source | https://github.com/hrsh7th/cmp-nvim-lua/
-    cmp-cmdline # cmp command line suggestions
-    cmp-cmdline-history # cmp command line history suggestions
-    # ^ nvim-cmp extensions
-    # git integration plugins
-    diffview-nvim # https://github.com/sindrets/diffview.nvim/
-    neogit # https://github.com/TimUntersberger/neogit/
-    gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
-    vim-fugitive # https://github.com/tpope/vim-fugitive/
-    # ^ git integration plugins
-    # telescope and extensions
-    telescope-nvim # https://github.com/nvim-telescope/telescope.nvim/
-    telescope-fzy-native-nvim # https://github.com/nvim-telescope/telescope-fzy-native.nvim
-    # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
-    # ^ telescope and extensions
-    # UI
-    lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
-    nvim-navic # Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic
-    statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim/
-    nvim-treesitter-context # nvim-treesitter-context
-    # ^ UI
-    # language support
-    # ^ language support
-    # navigation/editing enhancement plugins
-    vim-unimpaired # predefined ] and [ navigation keymaps | https://github.com/tpope/vim-unimpaired/
-    eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
-    nvim-surround # https://github.com/kylechui/nvim-surround/
-    nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
-    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
-    # ^ navigation/editing enhancement plugins
-    # Useful utilities
-    nvim-unception # Prevent nested neovim sessions | nvim-unception
-    # ^ Useful utilities
-    # libraries that other plugins depend on
-    sqlite-lua
-    plenary-nvim
-    nvim-web-devicons
-    vim-repeat
-    # ^ libraries that other plugins depend on
-    # bleeding-edge plugins from flake inputs
-    # (mkNvimPlugin inputs.wf-nvim "wf.nvim") # (example) keymap hints | https://github.com/Cassin01/wf.nvim
-    # ^ bleeding-edge plugins from flake inputs
-    which-key-nvim
+    plenary-nvim # lua functions that many plugins use
+    vim-tmux-navigator # tmux & split window navigation
+    (mkNvimPlugin inputs.tokyo-night "tokyonight") # Colorscheme
+    (mkNvimPlugin inputs.nvim-tree "nvim-tree") # Nvim Tree
+    (mkNvimPlugin inputs.nvim-web-devicons
+      "nvim-web-devicons") # Nvim Web Devicons
+    (mkNvimPlugin inputs.which-key "which-key") # Which key
+    (mkNvimPlugin inputs.alpha-nvim "alpha.nvim") # Greeter
+    (mkNvimPlugin inputs.auto-session-nvim
+      "auto-session.nvim") # Automatic session management
+    (mkNvimPlugin inputs.bufferline-nvim "bufferline.nvim") # Bufferline
+    (mkNvimPlugin inputs.lualine-nvim "lualine.nvim") # Status Line
+    (mkNvimPlugin inputs.lsp-status-nvim "lsp-status.nvim") # Diagnostic status and messages from LSP servers in lualine
+    (mkNvimPlugin inputs.dressing-nvim
+      "dressing.nvim") # Improve vim.ui.select vim.ui.input
+    (mkNvimPlugin inputs.vim-maximizer "vim-maximizer")
+    (mkNvimPlugin inputs.nvim-treesitter "nvim-tresitter")
+    (mkNvimPlugin inputs.nvim-ts-autotag "nvim-ts-autotag")
+    (mkNvimPlugin inputs.indent-blankline-nvim "indent")
+    (mkNvimPlugin inputs.autopairs-nvim "nvim-autopairs")
+    (mkNvimPlugin inputs.comment-nvim "comment.nvim")
+    (mkNvimPlugin inputs.nvim-ts-context-commentstring
+      "nvim-ts-context-commentstring")
+    (mkNvimPlugin inputs.todo-comments-nvim "todo-comments-nvim")
+    (mkNvimPlugin inputs.substitute-nvim "substitute.nvim")
+    (mkNvimPlugin inputs.surround-nvim "surround.nvim")
+    (mkNvimPlugin inputs.nvim-lspconfig "lspconfig") # For configuring LSP
+    (mkNvimPlugin inputs.go-nvim "go.nvim") # Golang LSP, ...etc
+    (mkNvimPlugin inputs.trouble-nvim "trouble.nvim") # interacting with the lsp and some other things like todo comments.
+    (mkNvimPlugin inputs.conform-nvim "conform.nvim") # Formatter
+    (mkNvimPlugin inputs.nvim-lint "nvim-lint") # Linting
+    (mkNvimPlugin inputs.gitsigns-nvim "gitsigns.nvim") # Gitsigns
+
+    # Completion
+    (mkNvimPlugin inputs.nvim-cmp "nvim-cmp")
+    (mkNvimPlugin inputs.cmp-buffer "cmp-buffer")
+    (mkNvimPlugin inputs.cmp-path "cmp-path")
+    (mkNvimPlugin inputs.cmp-luasnip "cmp_luasnip")
+    (mkNvimPlugin inputs.friendly-snippets "friendly-snippets")
+    (mkNvimPlugin inputs.lspkind-nvim "lspkind.nvim")
+    (mkNvimPlugin inputs.cmp-nvim-lsp "cmp-nvim-lsp")
+    (mkNvimPlugin inputs.nvim-lsp-file-operations "nvim-lsp-file-operations")
+    (mkNvimPlugin inputs.neodev "neodev")
+    luasnip
+
+    # Telescope
+    (mkNvimPlugin inputs.telescope-nvim "telescope.nvim")
+    telescope-fzf-native-nvim
   ];
 
   extraPackages = with pkgs; [
     # language servers, etc.
-    lua-language-server
+    lua-language-server # lua lsp
     nil # nix LSP
+
+    # Extra packages
+    ripgrep
+    lazygit
+
+
+
+    # Formatters
+    prettierd # js/ts ...etc
+    stylua # lua
+    isort black # python
+
+    # Linters
+    eslint_d # js/ts ...etc
+    pylint # python
   ];
 in {
   # This is the neovim derivation
@@ -97,9 +108,7 @@ in {
   };
 
   # This can be symlinked in the devShell's shellHook
-  nvim-luarc-json = final.mk-luarc-json {
-    plugins = all-plugins;
-  };
+  nvim-luarc-json = final.mk-luarc-json { plugins = all-plugins; };
 
   # You can add as many derivations as you like.
   # Use `ignoreConfigRegexes` to filter out config

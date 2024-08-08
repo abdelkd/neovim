@@ -6,6 +6,7 @@
 
 local M = {}
 
+
 ---Gets a 'ClientCapabilities' object, describing the LSP client capabilities
 ---Extends the object with capabilities provided by plugins.
 ---@return lsp.ClientCapabilities
