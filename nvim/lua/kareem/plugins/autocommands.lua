@@ -97,6 +97,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
 
     local servers = {
       'astro',
+      'bashls',
       'clangd',
       'emmet_language_server',
       'html',
