@@ -99,7 +99,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
       'astro',
       'bashls',
       'clangd',
-      'emmet_language_server',
+      -- 'emmet_language_server',
       'html',
       'htmx',
       'jdtls',

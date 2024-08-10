@@ -83,12 +83,19 @@ let
     # language servers, etc.
     lua-language-server # lua lsp
     nil # nix LSP
+    emmet-ls # Emmet language server
+    svelte-language-server # Svelte
+    tailwindcss-language-server # Tailwindcss
+    htmx-lsp # HTMX
+    nodePackages."@astrojs/language-server" # Astro
+    nodePackages.bash-language-server # Bash
+    clang-tools# Clang
+    jdt-language-server # jdtls
+    templ # Templ
 
     # Extra packages
     ripgrep
     lazygit
-
-
 
     # Formatters
     prettierd # js/ts ...etc
