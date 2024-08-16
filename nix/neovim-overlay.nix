@@ -92,6 +92,7 @@ let
     clang-tools# Clang
     jdt-language-server # jdtls
     templ # Templ
+    rust-analyzer # Rust LSP
 
     # Extra packages
     ripgrep
