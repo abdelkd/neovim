@@ -89,6 +89,7 @@ let
     htmx-lsp # HTMX
     nodePackages."@astrojs/language-server" # Astro
     nodePackages.bash-language-server # Bash
+    nodePackages.typescript-language-server # Typescript
     clang-tools# Clang
     jdt-language-server # jdtls
     templ # Templ
