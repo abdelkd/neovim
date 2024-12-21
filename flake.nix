@@ -115,8 +115,8 @@
     nvim-lsp-file-operations.url = "github:antosha417/nvim-lsp-file-operations";
     nvim-lsp-file-operations.flake = false;
 
-    neodev.url = "github:folke/neodev.nvim";
-    neodev.flake = false;
+    neoconf.url = "github:folke/neoconf.nvim";
+    neoconf.flake = false;
 
     # {
     #   "L3MON4D3/LuaSnip",

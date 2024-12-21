@@ -343,19 +343,19 @@
         "type": "github"
       }
     },
-    "neodev": {
+    "neoconf": {
       "flake": false,
       "locked": {
-        "lastModified": 1720260306,
-        "narHash": "sha256-hOjzlo/IqmV8tYjGwfmcCPEmHYsWnEIwtHZdhpwA1kM=",
+        "lastModified": 1726968602,
+        "narHash": "sha256-KmIAbDjupqs7ex7EN5Fe7iEy1VPOXTRV1YlfUrEeIGY=",
         "owner": "folke",
-        "repo": "neodev.nvim",
-        "rev": "46aa467dca16cf3dfe27098042402066d2ae242d",
+        "repo": "neoconf.nvim",
+        "rev": "61b10cd334dc8f693e391c5ef8c5832093a46cf5",
         "type": "github"
       },
       "original": {
         "owner": "folke",
-        "repo": "neodev.nvim",
+        "repo": "neoconf.nvim",
         "type": "github"
       }
     },
@@ -569,7 +569,7 @@
         "lsp-status-nvim": "lsp-status-nvim",
         "lspkind-nvim": "lspkind-nvim",
         "lualine-nvim": "lualine-nvim",
-        "neodev": "neodev",
+        "neoconf": "neoconf",
         "nixpkgs": "nixpkgs_2",
         "nvim-cmp": "nvim-cmp",
         "nvim-lint": "nvim-lint",

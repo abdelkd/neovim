@@ -71,7 +71,7 @@ let
     (mkNvimPlugin inputs.lspkind-nvim "lspkind.nvim")
     (mkNvimPlugin inputs.cmp-nvim-lsp "cmp-nvim-lsp")
     (mkNvimPlugin inputs.nvim-lsp-file-operations "nvim-lsp-file-operations")
-    (mkNvimPlugin inputs.neodev "neodev")
+    (mkNvimPlugin inputs.neoconf "neoconf.nvim")
     luasnip
 
     # Telescope
@@ -89,8 +89,8 @@ let
     htmx-lsp # HTMX
     nodePackages."@astrojs/language-server" # Astro
     nodePackages.bash-language-server # Bash
-    nodePackages.typescript-language-server # Typescript
-    clang-tools# Clang
+    nodePackages.typescript nodePackages.typescript-language-server # Typescript
+    clang-tools # Clang
     jdt-language-server # jdtls
     templ # Templ
     rust-analyzer # Rust LSP
