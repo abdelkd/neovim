@@ -38,7 +38,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap.set('n', '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', opts) -- show  diagnostics for file
 
     opts.desc = 'Show line diagnostics'
-    keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts) -- show diagnostics for line
+    keymap.set('n', '<leader>cd', function()
+      vim.diagnostic.open_float(nil, { scope = 'line' })
+    end, opts) -- show diagnostics for line
 
     opts.desc = 'Go to previous diagnostic'
     keymap.set('n', '[d', vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
@@ -55,7 +57,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if args then
       if args.data and args.data.client_id then
         local client = vim.lsp.get_client_by_id(args.data.client_id)
-        print(client, args.data)
 
         if client and client.server_capabilities.codeLensProvider then
           vim.api.nvim_create_autocmd({ 'CursorMoved ' }, {
