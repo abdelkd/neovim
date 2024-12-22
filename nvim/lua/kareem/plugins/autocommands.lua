@@ -2,7 +2,7 @@ if vim.g.did_load_autocommands_plugin then
   return
 end
 vim.g.did_load_autocommands_plugin = true
-local keymaps = require('kareem.plugins.keymaps')
+local keymaps = require('kareem.core.keymaps')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),

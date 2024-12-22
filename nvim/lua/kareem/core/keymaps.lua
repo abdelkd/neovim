@@ -1,31 +1,126 @@
+if vim.g.did_load_which_key_plugin then
+  return
+end
+vim.g.did_load_which_key_plugin = true
+
 -- set leader key to space
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
-local keymap = vim.keymap -- for conciseness
+local wk = require('which-key')
+local conform = require('conform')
 
----------------------
--- General Keymaps -------------------
+vim.o.timeout = true
+vim.o.timeoutlen = 500
 
--- use jk to exit insert mode
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
+local M = {}
 
--- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+local keymap = vim.keymap
 
--- delete single character without copying into register
--- keymap.set("n", "x", '"_x')
+-- General Keymaps
+function M.general_keymaps()
+  -- use jk to exit insert mode
+  keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
 
-keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
-keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
+  wk.register {
+    ['<leader>'] = {
+      ['q'] = { '<cmd>q<CR>', 'Quit' },
+      ['w'] = { '<cmd>w<CR>', 'Save' },
+      ['x'] = { '<cmd>q!<CR>', 'Force Quit' },
+      ['h'] = { '<cmd>nohlsearch<CR>', 'Clear Search Highlight' },
+      ['+'] = { '<C-a>', 'Increment Number' },
+      ['-'] = { '<C-a>', 'Decrement Number' },
+      ['s'] = {
+        name = 'Window Management',
+        v = { '<C-w>v', 'Split Window Vertically' },
+        h = { '<C-w>h', 'Split Window Horizontally' },
+        e = { '<C-w>=', 'Make Splits Equal' },
+        x = { '<cmd>close<CR>', 'Close Current Split' },
+      },
+      ['t'] = {
+        name = 'Tab Management',
+        o = { '<cmd>tabnew<CR>', 'Open New Tab' },
+        x = { '<cmd>tabclose<CR>', 'Close Current Tab' },
+        n = { '<cmd>tabn<CR>', 'Open to Next Tab' },
+        p = { '<cmd>tabp<CR>', 'Open to Previous Tab' },
+        f = { '<cmd>tabnew %<CR>', 'Open Crrent Buffer In New Tab' },
+      },
 
--- window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+      -- Git Keymaps
+      g = {
+        name = 'Git',
+        g = { '<cmd>Telescope git_status<CR>', 'Git Status' },
+        b = { '<cmd>Telescope git_branches<CR>', 'Git Branches' },
+      },
+    },
+  }
+end
 
-keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
-keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
-keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
-keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
-keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+-- Telescope Keymaps
+function M.telescope_keymaps()
+  wk.register {
+    ['<leader>'] = {
+      f = {
+        name = 'File',
+        f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
+        r = { '<cmd>Telescope oldfiles<CR>', 'Recent Files' },
+        g = { '<cmd>Telescope live_grep<CR>', 'Live Grep' },
+        b = { '<cmd>Telescope buffers<CR>', 'List Buffers' },
+      },
+    },
+  }
+end
+
+-- LSP Keymaps
+function M.lsp_keymaps(bufnr)
+  wk.register({
+    g = {
+      name = 'Goto',
+      d = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Go to Definition' },
+      r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Find References' },
+      i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Go to Implementation' },
+      t = { '<cmd>Telescope lsp_type_definitions<CR>' },
+    },
+    ['<leader>'] = {
+      l = {
+        name = 'LSP',
+        r = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename Symbol' },
+        a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code Action' },
+        e = { '<cmd>lua vim.lsp.buf.open_float()<CR>', 'Show Diagnostics' },
+        q = { '<cmd>lua vim.lsp.buf.setloclist()<CR>', 'Quickfix Diagnostics' },
+        d = { '<cmd>Telescope diagnostics bufnr=0<CR>', 'Show Buffer Diagnostics' },
+        l = { '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line" })<CR>', 'Show Line Diagnostics' },
+        h = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover Documentation' },
+        R = { '<cmd>lua vim.lsp.restart_client()<CR>', 'Restart LSP Server' },
+        c = { '<cmd>lua vim.lsp.codelens.run()<CR>', 'Run CodeLens Action' },
+      },
+    },
+  }, { buffer = bufnr })
+end
+
+-- Formatting Keymaps
+function M.formatting_keymaps()
+  wk.register {
+    ['<leader>'] = {
+      F = {
+        name = 'Format',
+        f = {
+          function()
+            conform.format {
+              lsp_fallback = true,
+              async = false,
+              timeout_ms = 1000,
+            }
+          end,
+          'Format File',
+        },
+      },
+    },
+  }
+end
+
+function M.setup()
+  M.general_keymaps()
+  M.telescope_keymaps()
+end
+
+return M

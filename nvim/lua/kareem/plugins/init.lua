@@ -19,8 +19,6 @@ require('kareem.plugins.telescope')
 require('kareem.plugins.todo-comments')
 require('kareem.plugins.trouble')
 
-require('kareem.plugins.keymaps').setup()
-
 require('dressing').setup()
 require('mini.icons').setup {
   file = {
