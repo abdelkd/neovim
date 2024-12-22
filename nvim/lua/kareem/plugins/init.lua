@@ -18,7 +18,7 @@ require('kareem.plugins.surround')
 require('kareem.plugins.telescope')
 require('kareem.plugins.todo-comments')
 require('kareem.plugins.trouble')
-require('kareem.plugins.which-key')
+require('kareem.plugins.keymaps')
 
 require('dressing').setup()
 vim.keymap.set('n', '<leader>sm', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/minimize a split' })
