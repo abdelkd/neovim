@@ -2,8 +2,7 @@ if vim.g.did_load_autocommands_plugin then
   return
 end
 vim.g.did_load_autocommands_plugin = true
-
-local keymap = vim.keymap
+local keymaps = require('kareem.plugins.keymaps')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -11,63 +10,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = args.buf, silent = true }
+    keymaps.lsp_keymaps(args.buf)
 
-    -- set keybinds
-    opts.desc = 'Show LSP references'
-    keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts) -- show definition, references
-
-    opts.desc = 'Go to declaration'
-    keymap.set('n', 'gD', vim.lsp.buf.declaration, opts) -- go to declaration
-
-    opts.desc = 'Show LSP definitions'
-    keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts) -- show lsp definitions
-
-    opts.desc = 'Show LSP implementations'
-    keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts) -- show lsp implementations
-
-    opts.desc = 'Show LSP type definitions'
-    keymap.set('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', opts) -- show lsp type definitions
-
-    opts.desc = 'See available code actions'
-    keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
-    opts.desc = 'Smart rename'
-    keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts) -- smart rename
-
-    opts.desc = 'Show buffer diagnostics'
-    keymap.set('n', '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', opts) -- show  diagnostics for file
-
-    opts.desc = 'Show line diagnostics'
-    keymap.set('n', '<leader>cd', function()
-      vim.diagnostic.open_float(nil, { scope = 'line' })
-    end, opts) -- show diagnostics for line
-
-    opts.desc = 'Go to previous diagnostic'
-    keymap.set('n', '[d', vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-    opts.desc = 'Go to next diagnostic'
-    keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-    opts.desc = 'Show documentation for what is under cursor'
-    keymap.set('n', 'K', vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-    opts.desc = 'Restart LSP'
-    keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
-
-    if args then
-      if args.data and args.data.client_id then
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        if client and client.server_capabilities.codeLensProvider then
-          vim.api.nvim_create_autocmd({ 'CursorMoved ' }, {
-            callback = function()
-              vim.lsp.codelens.refresh()
-            end,
-          })
-          vim.keymap.set('n', 'z!', vim.lsp.codelens.run, { buffer = args.buf, silent = true })
-        end
-      end
-    end
+    -- if args then
+    --   if args.data and args.data.client_id then
+    --     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --
+    --     if client and client.server_capabilities.codeLensProvider then
+    --       vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    --         callback = function()
+    --           vim.lsp.codelens.refresh()
+    --         end,
+    --       })
+    --       vim.keymap.set('n', 'z!', vim.lsp.codelens.run, { buffer = args.buf, silent = true })
+    --     end
+    --   end
+    -- end
   end,
 })
 
@@ -89,8 +47,6 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-    local keymap = vim.keymap -- for conciseness
-
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = require('kareem.lsp').make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
@@ -109,7 +65,6 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
       'bashls',
       'clangd',
       'html',
-      'htmx',
       'jdtls',
       'jsonls',
       'nil_ls',
@@ -125,17 +80,69 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
       }
     end
 
-    lspconfig.tsserver.setup {
+    local local_tsserver = './node_modules/.bin/tsserver'
+    local global_tsserver = vim.fn.system('which tsserver'):gsub('\n', '')
+
+    local function get_tsserver_cmd()
+      local tsserver_path = vim.fn.executable(local_tsserver) == 1 and local_tsserver or global_tsserver
+      return { tsserver_path, '--stdio' }
+    end
+
+    lspconfig.ts_ls.setup {
       enabled = true,
-      on_attach = function(client, bufnr) end,
       capabilities = capabilities,
-      flags = {
-        debounce_text_change = 300,
-      },
-      init_options = {
-        hostInfo = 'neovim',
+      -- TODO should be generated/fixed in nix
+      cmd = {
+        'typescript-language-server',
+        '--stdio',
       },
     }
+    -- lspconfig.vtsls.setup {
+    --   -- explicitly add default filetypes, so that we can extend
+    --   -- them in related extras
+    --   filetypes = {
+    --     'javascript',
+    --     'javascriptreact',
+    --     'javascript.jsx',
+    --     'typescript',
+    --     'typescriptreact',
+    --     'typescript.tsx',
+    --   },
+    --   settings = {
+    --     complete_function_calls = true,
+    --     vtsls = {
+    --       enableMoveToFileCodeAction = true,
+    --       autoUseWorkspaceTsdk = true,
+    --       experimental = {
+    --         maxInlayHintLength = 30,
+    --         completion = {
+    --           enableServerSideFuzzyMatch = true,
+    --         },
+    --       },
+    --     },
+    --   },
+    --   typescript = {
+    --     updateImportsOnFileMove = { enabled = 'always' },
+    --     suggest = {
+    --       completeFunctionCalls = true,
+    --     },
+    --     inlayHints = {
+    --       enumMemberValues = { enabled = true },
+    --       functionLikeReturnTypes = { enabled = true },
+    --       parameterNames = { enabled = 'literals' },
+    --       parameterTypes = { enabled = true },
+    --       propertyDeclarationTypes = { enabled = true },
+    --       variableTypes = { enabled = false },
+    --     },
+    --   },
+    -- }
+
+    -- lspconfig.ts_ls.setup {
+    --   capabilities = capabilities,
+    --   flags = {
+    --     debounce_text_change = 300,
+    --   },
+    -- }
 
     lspconfig.gopls.setup {
       filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },

@@ -343,6 +343,22 @@
         "type": "github"
       }
     },
+    "mini-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734008284,
+        "narHash": "sha256-RxaOntmnL/xy8lYu3fTBve3MV7ZTRc/xSrp5psU/YW0=",
+        "owner": "echasnovski",
+        "repo": "mini.icons",
+        "rev": "44c0160526f7ae17ca8e8eab9ab235d047fcf7a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "echasnovski",
+        "repo": "mini.icons",
+        "type": "github"
+      }
+    },
     "neoconf": {
       "flake": false,
       "locked": {
@@ -454,11 +470,11 @@
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1723024285,
-        "narHash": "sha256-qxysoQO6JpdUY81KSZ0denNFe+RX3+/VCq9xbVdGAR8=",
+        "lastModified": 1734875042,
+        "narHash": "sha256-3CTSNqmT2zVHXpGyQxtfaSZ37iIwBUouH3OhpVE2VR4=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "652386deae739e38fa1bcf2f06e3e7de9b3436ba",
+        "rev": "9204642002ba91f9e0b7d0e5989f373657fe754a",
         "type": "github"
       },
       "original": {
@@ -569,6 +585,7 @@
         "lsp-status-nvim": "lsp-status-nvim",
         "lspkind-nvim": "lspkind-nvim",
         "lualine-nvim": "lualine-nvim",
+        "mini-nvim": "mini-nvim",
         "neoconf": "neoconf",
         "nixpkgs": "nixpkgs_2",
         "nvim-cmp": "nvim-cmp",

@@ -18,8 +18,20 @@ require('kareem.plugins.surround')
 require('kareem.plugins.telescope')
 require('kareem.plugins.todo-comments')
 require('kareem.plugins.trouble')
-require('kareem.plugins.keymaps')
+
+require('kareem.plugins.keymaps').setup()
 
 require('dressing').setup()
-vim.keymap.set('n', '<leader>sm', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/minimize a split' })
-vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<cr>', { desc = 'Open lazy git' })
+require('mini.icons').setup {
+  file = {
+    ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+    ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
+    ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
+    ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
+    ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+    ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
+    ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+    ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+    ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
+  },
+}

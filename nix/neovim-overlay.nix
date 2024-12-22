@@ -72,6 +72,7 @@ let
     (mkNvimPlugin inputs.cmp-nvim-lsp "cmp-nvim-lsp")
     (mkNvimPlugin inputs.nvim-lsp-file-operations "nvim-lsp-file-operations")
     (mkNvimPlugin inputs.neoconf "neoconf.nvim")
+    (mkNvimPlugin inputs.mini-nvim "mini.nvim")
     luasnip
 
     # Telescope

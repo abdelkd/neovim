@@ -89,7 +89,6 @@
     gitsigns-nvim.url = "github:lewis6991/gitsigns.nvim";
     gitsigns-nvim.flake = false;
 
-
     # Nvim Completion
     nvim-cmp.url = "github:hrsh7th/nvim-cmp";
     nvim-cmp.flake = false;
@@ -117,6 +116,9 @@
 
     neoconf.url = "github:folke/neoconf.nvim";
     neoconf.flake = false;
+
+    mini-nvim.url = "github:echasnovski/mini.icons";
+    mini-nvim.flake = false;
 
     # {
     #   "L3MON4D3/LuaSnip",
