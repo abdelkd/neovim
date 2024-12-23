@@ -13,6 +13,65 @@ g.maplocalleader = ' '
 
 opt.compatible = false
 
+opt.shadafile = 'NONE'
+opt.timeoutlen = 500
+opt.updatetime = 250
+opt.redrawtime = 1500
+opt.ttyfast = true
+opt.hidden = true
+
+-- Plugin optimizations
+local function optimize_plugins()
+  -- Treesitter optimization
+  require('nvim-treesitter').setup {
+    highlight = {
+      enable = true,
+      disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+      end,
+    },
+  }
+
+  -- Disable certain features for large files
+  vim.api.nvim_create_autocmd('BufReadPre', {
+    pattern = '*',
+    callback = function(opts)
+      local max_filesize = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.loop.fs_stat, opts.match)
+      if ok and stats and stats.size > max_filesize then
+        -- Disable heavy features for large files
+        vim.b[opts.buf].large_file = true
+        vim.opt_local.foldmethod = 'manual'
+        vim.opt_local.syntax = 'off'
+      end
+    end,
+  })
+end
+
+optimize_plugins()
+
+-- Cache optimization
+vim.opt.directory = vim.fn.stdpath('cache') .. '/swp' -- Centralize swap files
+vim.opt.undodir = vim.fn.stdpath('cache') .. '/undo' -- Centralize undo files
+vim.opt.backupdir = vim.fn.stdpath('cache') .. '/backup' -- Centralize backups
+
+-- TypeScript project-specific optimizations
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+  callback = function()
+    -- Disable certain features for better performance in TS/JS files
+    vim.opt_local.foldmethod = 'manual'
+    vim.opt_local.formatexpr = '' -- Use faster formatting
+
+    -- Set updatetime specifically for TS files
+    vim.opt_local.updatetime = 300
+  end,
+})
+
 -- Enable true colour support
 if fn.has('termguicolors') then
   opt.termguicolors = true

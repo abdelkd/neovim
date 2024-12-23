@@ -44,6 +44,33 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
     local lsp_status = require('lsp-status') -- LSP status in statusline
     lsp_status.register_progress()
 
+    local lsp_config = {
+      -- Decrease update frequency
+      flags = {
+        debounce_text_change = 300,
+      },
+
+      -- Limit workspace folders
+      workspace = {
+        maxPreload = 3000, -- Maximum files to preload
+        preloadFileSize = 1000, -- Maximum file size (KB) to preload
+      },
+    }
+
+    local on_attach = function(client, bufnr)
+      -- Disable certain features that might impact performance
+      client.server_capabilities.semanticTokensProvider = nil -- Disable semantic highlighting
+
+      -- Limit features for large files
+      local max_file_size = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+      if ok and stats and stats.size > max_file_size then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        vim.diagnostic.enable(false, { bufnr = bufnr })
+      end
+    end
+
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
@@ -83,14 +110,72 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
     local local_tsserver = './node_modules/.bin/tsserver'
     local global_tsserver = vim.fn.system('which tsserver'):gsub('\n', '')
 
-    local function get_tsserver_cmd()
-      local tsserver_path = vim.fn.executable(local_tsserver) == 1 and local_tsserver or global_tsserver
-      return { tsserver_path, '--stdio' }
-    end
+    local ts_settings = {
+      typescript = {
+        inlineHints = {
+          includeInlayParameterNameHints = 'none',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayPropertyDeclarationTypeHints = false,
+          includeInlayFunctionLikeReturnReturnTypeHints = false,
+          includeInlayEnumMemberValueHints = false,
+        },
+        suggest = {
+          includeCompletionsForModuleExports = true,
+          includeCompletionsWithObjectLiteralMethodSnippets = true,
+          completeFunctionCalls = false, -- Disable function call completion
+          autoImportFileExcludePatterns = { 'node_modules/*', 'dist/*' },
+        },
+        format = {
+          enable = true,
+          indentSize = 2,
+          convertTabsToSpaces = true,
+          trimTrailingWhitespace = true,
+        },
+        maxTsServerMemory = 4096,
+        disableAutomaticTypeAcquisition = true, -- Disable automatic @types downloading
+      },
+      javascript = {
+        inlineHints = {
+          includeInlayParameterNameHints = 'none',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayPropertyDeclarationTypeHints = false,
+          includeInlayFunctionLikeReturnReturnTypeHints = false,
+          includeInlayEnumMemberValueHints = false,
+        },
+      },
+    }
 
     lspconfig.ts_ls.setup {
       enabled = true,
+      on_attach = on_attach,
+      settings = ts_settings,
       capabilities = capabilities,
+      flags = lsp_config.flags,
+      init_options = {
+        hostInfo = 'neovim',
+        maxTsServerMemory = 4096,
+        preferences = {
+          importModuleSpecifierPreference = 'relative',
+          includePackageJsonAutoImports = 'auto',
+        },
+        tsserver = {
+          logVerbosity = 'off', -- Disable logging
+          trace = 'off', -- Disable tracing
+          useSyntaxServer = 'never', -- Disable secondary syntax server
+        },
+      },
+      commands = {
+        TSServerRetartOnLowMemory = {
+          function()
+            vim.cmd('LspRestart')
+          end,
+          description = 'Restart TS server if memory usage is high',
+        },
+      },
       -- TODO should be generated/fixed in nix
       cmd = {
         'typescript-language-server',

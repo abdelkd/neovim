@@ -10,43 +10,55 @@ vim.api.nvim_create_autocmd('InsertEnter', {
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
 
-    lspkind.init {
-      -- Enable text-based completion icons
-      with_text = true,
-      -- Define symbols (e.g., for function, variable, etc.)
-      symbol_map = {
-        Text = '', -- Text symbol
-        Method = '', -- Method symbol
-        Function = '', -- Function symbol
-        Constructor = '', -- Constructor symbol
-        Field = '', -- Field symbol
-        Variable = '', -- Variable symbol
-        Class = 'ﴯ', -- Class symbol
-        Interface = '了', -- Interface symbol
-        Module = '', -- Module symbol
-        Property = '', -- Property symbol
-        Unit = '', -- Unit symbol
-        Value = '', -- Value symbol
-        Enum = '', -- Enum symbol
-        Keyword = '', -- Keyword symbol
-        Snippet = '', -- Snippet symbol
-        Color = '', -- Color symbol
-        File = '', -- File symbol
-        Reference = '', -- Reference symbol
-        Folder = '', -- Folder symbol
-        EnumMember = '', -- Enum member symbol
-        Constant = '', -- Constant symbol
-        Struct = '', -- Struct symbol
-        Event = '', -- Event symbol
-        Operator = '', -- Operator symbol
-        TypeParameter = '', -- Type parameter symbol
-      },
-    }
+    -- lspkind.init {
+    --   -- Enable text-based completion icons
+    --   with_text = true,
+    --   -- Define symbols (e.g., for function, variable, etc.)
+    --   symbol_map = {
+    --     Text = '', -- Text symbol
+    --     Method = '', -- Method symbol
+    --     Function = '', -- Function symbol
+    --     Constructor = '', -- Constructor symbol
+    --     Field = '', -- Field symbol
+    --     Variable = '', -- Variable symbol
+    --     Class = 'ﴯ', -- Class symbol
+    --     Interface = '了', -- Interface symbol
+    --     Module = '', -- Module symbol
+    --     Property = '', -- Property symbol
+    --     Unit = '', -- Unit symbol
+    --     Value = '', -- Value symbol
+    --     Enum = '', -- Enum symbol
+    --     Keyword = '', -- Keyword symbol
+    --     Snippet = '', -- Snippet symbol
+    --     Color = '', -- Color symbol
+    --     File = '', -- File symbol
+    --     Reference = '', -- Reference symbol
+    --     Folder = '', -- Folder symbol
+    --     EnumMember = '', -- Enum member symbol
+    --     Constant = '', -- Constant symbol
+    --     Struct = '', -- Struct symbol
+    --     Event = '', -- Event symbol
+    --     Operator = '', -- Operator symbol
+    --     TypeParameter = '', -- Type parameter symbol
+    --   },
+    -- }
 
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require('luasnip.loaders.from_vscode').lazy_load()
 
     cmp.setup {
+      window = {
+        completion = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'Normal:Pmenu,NormalNC:PmenuSel,Search:None',
+          col_offset = -3,
+          side_padding = 1,
+        },
+        documentation = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'Normal:Pmenu,NormalNC:PmenuSel,Search:None',
+        },
+      },
       completion = {
         completeopt = 'menu,menuone,preview,noselect',
       },

@@ -83,11 +83,11 @@
     "cmp-luasnip": {
       "flake": false,
       "locked": {
-        "lastModified": 1696878902,
-        "narHash": "sha256-nUJJl2zyK/oSwz5RzI9j3gf9zpDfCImCYbPbVsyXgz8=",
+        "lastModified": 1730707109,
+        "narHash": "sha256-86lKQPPyqFz8jzuLajjHMKHrYnwW6+QOcPyQEx6B+gw=",
         "owner": "saadparwaiz1",
         "repo": "cmp_luasnip",
-        "rev": "05a9ab28b53f71d1aece421ef32fee2cb857a843",
+        "rev": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90",
         "type": "github"
       },
       "original": {

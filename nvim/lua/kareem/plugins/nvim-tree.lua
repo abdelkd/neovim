@@ -11,7 +11,7 @@ vim.g.loaded_netrwPlugin = 1
 
 nvimtree.setup {
   view = {
-    size = 'right',
+    side = 'right',
     width = 35,
     relativenumber = true,
   },
@@ -46,12 +46,6 @@ nvimtree.setup {
   },
   git = {
     enable = true,
-    unstaged = '✗',
-    staged = '✓',
-    untracked = '?',
-    renamed = '➜',
-    deleted = '',
-    ignored = '◌',
   },
   diagnostics = {
     enable = true,
